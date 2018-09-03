@@ -16,12 +16,12 @@ interface CommandResolverInterface
      *
      * @return void
      */
-    public function registerCommand(): void ;
+    public function registerCommand(): void;
 
     /**
      * Array of registered commands
      *
      * @return array
      */
-    public function getCommandMap();
+    public function getCommandMap(): array;
 }

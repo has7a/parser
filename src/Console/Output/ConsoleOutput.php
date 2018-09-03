@@ -9,16 +9,16 @@ class ConsoleOutput implements OutputInterface
      */
     public function write(string $message): void
     {
-        echo $message . PHP_EOL;
+        echo $message;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function writeln(array $messages):void
+    public function writeln(array $messages): void
     {
         foreach ($messages as $message) {
-            $this->write($message);
+            $this->write($message . PHP_EOL);
         }
     }
 }

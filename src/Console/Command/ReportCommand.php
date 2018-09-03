@@ -59,7 +59,7 @@ final class ReportCommand implements CommandInterface
         $this->url = new Url($input->getArgument('url'));
         $fileName = CSV_STORAGE_DIR . $this->url->getFileName();
         if (!file_exists($fileName)) {
-            $output->write($this->errorFormatter->apply(sprintf('Url: %s has not been parsed yet!', $this->url->getUrl())));
+            $output->write($this->errorFormatter->apply(sprintf("Url: %s has not been parsed yet!\n", $this->url->getUrl())));
 
             return;
         }

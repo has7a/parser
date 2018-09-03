@@ -9,12 +9,12 @@ interface OutputInterface
      *
      * @return void
      */
-    public function write(string $message): void ;
+    public function write(string $message): void;
 
     /**
      * @param array $message
      *
      * @return void
      */
-    public function writeln(array $message): void ;
+    public function writeln(array $message): void;
 }

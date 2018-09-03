@@ -90,7 +90,7 @@ final class ParseCommand implements CommandInterface
     private function printResult(string $path, OutputInterface $output): void
     {
         $line = sprintf(
-            "Url: %s, has been successfully parsed!\nCheck result:%s",
+            "Url: %s, has been successfully parsed!\nCheck result:%s\n",
             $this->url->getUrl(),
             $path
         );
