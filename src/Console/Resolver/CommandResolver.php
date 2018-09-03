@@ -31,7 +31,6 @@ final class CommandResolver implements CommandResolverInterface
      * @param string $name
      *
      * @return CommandInterface
-     * @throws ParserException
      */
     public function getExistCommand($name): CommandInterface
     {
@@ -39,20 +38,20 @@ final class CommandResolver implements CommandResolverInterface
             $name = self::HELP_COMMAND;
         }
 
-        try {
-            return $this->getCommand($name);
-        } catch (ParserException $e) {
+        $command = $this->getCommand($name);
+        if ($command === null) {
             return $this->getCommand(self::HELP_COMMAND);
         }
+
+        return $command;
     }
 
     /**
      * @param string $name
      *
-     * @return mixed
-     * @throws ParserException
+     * @return null|CommandInterface
      */
-    private function getCommand(string $name)
+    private function getCommand(string $name): ?CommandInterface
     {
         $commandMap = $this->getCommandMap();
         if (isset($commandMap[$name])) {
@@ -61,14 +60,13 @@ final class CommandResolver implements CommandResolverInterface
             return new $class();
         }
 
-        throw new ParserException(sprintf('Command \'%s\' does not exits!', $name));//message
+        return null;
     }
 
     /**
      * @param array $nameList
      *
      * @return array
-     * @throws ParserException
      */
     public function getCommandList(array $nameList): array
     {

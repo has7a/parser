@@ -18,10 +18,10 @@ $input = new Input();
 $output = new ConsoleOutput();
 
 $commandResolver = new CommandResolver();
+$command = $commandResolver->getExistCommand($input->getFirstArgument());
+$input->bind($command);
 
 try {
-    $command = $commandResolver->getExistCommand($input->getFirstArgument());
-    $input->bind($command);
     $input->parse();
     $command->execute($input, $output);
 } catch (Exception $e) {
@@ -29,6 +29,7 @@ try {
     $output->write($errorFormatter->apply($e->getMessage()));
 }
 
-$executionTime = (microtime(true) - $timeStart) / 60;
-echo 'Total Execution Time: ' . $executionTime . ' Min' . PHP_EOL;
+$executionTime = microtime(true) - $timeStart;
+
+echo "\nTotal Execution Time: {$executionTime} seconds.\n";
 
