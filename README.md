@@ -2,17 +2,17 @@
 
 `parse` command requires one argument: `url`
 ```
-./bin/console parse sport.ua
+./bin/app parse sport.ua
 ```
 
 `report` command requires one argument: `url` 
 ```
-./bin/console report sport.ua
+./bin/app report sport.ua
 ```
 
 `help` command does not require arguments
 ```
-./bin/console help
+./bin/app help
 ```
 
 ### NOTE
