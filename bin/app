@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+use App\Console\Formatter\StyleFormatter;
+use App\Console\Input\Input;
+use App\Console\Output\ConsoleOutput;
+use App\Console\Resolver\CommandResolver;
+
+$timeStart = microtime(true);
+set_time_limit(0);
+
+defined('BIN_DIR') or define('BIN_DIR', __DIR__);
+defined('CSV_STORAGE_DIR') or define('CSV_STORAGE_DIR', __DIR__ . '/../storage/csv/');
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$input = new Input();
+$output = new ConsoleOutput();
+
+$commandResolver = new CommandResolver();
+
+try {
+    $command = $commandResolver->getExistCommand($input->getFirstArgument());
+    $input->bind($command);
+    $input->parse();
+    $command->execute($input, $output);
+} catch (Exception $e) {
+    $errorFormatter = new StyleFormatter('white', 'red');
+    $output->write($errorFormatter->apply($e->getMessage()));
+}
+
+$executionTime = (microtime(true) - $timeStart) / 60;
+echo 'Total Execution Time: ' . $executionTime . ' Min' . PHP_EOL;
+
