@@ -83,7 +83,7 @@ final class ReportCommand implements CommandInterface
             $spacingWidth = $width - \strlen($domain);
             $lines[] = $this->infoStyleFormatter->apply(sprintf('  %s %s%d', $domain, str_repeat(' ', $spacingWidth), $count));
         }
-        $lines[] = $this->infoStyleFormatter->apply(sprintf('Detailed review: %s', CSV_STORAGE_DIR . $this->url->getFileName()));
+        $lines[] = $this->infoStyleFormatter->apply(sprintf('Detailed review: %s', realpath(CSV_STORAGE_DIR . $this->url->getFileName())));
         $output->writeln($lines);
     }
 

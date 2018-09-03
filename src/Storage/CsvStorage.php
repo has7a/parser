@@ -38,7 +38,7 @@ final class CsvStorage implements StorageInterface
         }
         fclose($handle);
 
-        return $fileName;
+        return realpath($fileName);
     }
 
     /**
